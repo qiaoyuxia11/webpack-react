@@ -3,15 +3,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require('webpack');
+const  nodeExternals  = require('webpack-node-externals') ; 
 
 
 module.exports = {
+    target:'node',
     mode: "development", // enabled useful tools for development
     devtool:'cheap-module-eval-source-map',
-    entry: ["./src/client/index.js"],
+    externals: [nodeExternals()],
+    entry: ["./src/server/index.js"],
     output: {
-        filename:'index.js',
-        path:path.resolve(__dirname,'../public')
+        filename:'bundle.js',
+        path:path.resolve(__dirname,'../build')
     },
     module: {// 关于模块配置
         rules: [
